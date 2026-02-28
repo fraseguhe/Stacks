@@ -86,21 +86,27 @@ public class EditorDeTexto {
                 texto = new ArrayDeque<>(respaldo);
                 break;
                 case 4:
-                /*aca puse que se imprimiera una texto que separara el menu 
-                porque no se apreciaba bien a mi parecer*/
-                System.out.println("==========");
-                System.out.println("  TEXTO");
-                System.out.println("==========");
-                /*aca muy importante yo no queria imprimir el array de texto directamente porque no se veia bien 
-                lleno de todas esas , y con los [], entonces este ciclo for va a ejecutarse unicamente el numero de elementos 
-                de texto que haya dentro del arreglo asignado a la variable texto y va a imprimir cada uno de los elementos seguido de un espacio en blanco*/
-                    for (String element:texto) {
-                        System.out.print(element+" ");
+                    /*aca el if comprobara si el array texto esta vacio y en caso de ser verdadero imprimira unicamente
+                    que no hay texto para mostar */
+                    if (texto.isEmpty()) {
+                    System.out.println("No hay texto para mostar");
                     }
-                /*estos saltos en consola es para que cuando el ciclo for termine y vuelva a ejecutarse el while no sea en la misma linea que nuestro texto
-                y 2 porque me parece que se ve mejor */
-                System.out.println();
-                System.out.println();
+                    else {
+                    /*aca puse que se imprimiera una texto que separara el menu 
+                    porque no se apreciaba bien a mi parecer*/
+                    System.out.println("==========");
+                    System.out.println("  TEXTO");
+                    System.out.println("==========");
+                    /*aca muy importante yo no queria imprimir el array de texto directamente porque no se veia bien 
+                    lleno de todas esas , y con los [], entonces este ciclo for va a ejecutarse unicamente el numero de elementos 
+                    de texto que haya dentro del arreglo asignado a la variable texto y va a imprimir cada uno de los elementos seguido de un espacio en blanco*/
+                        for (String element:texto) {
+                            System.out.print(element+" ");
+                        }
+                    }/*estos saltos en consola es para que cuando el ciclo for termine y vuelva a ejecutarse el while no sea en la misma linea que nuestro texto
+                    y 2 porque me parece que se ve mejor */
+                    System.out.println();
+                    System.out.println();
                 /*aca tenia un poblema y era que al probar despues de tantos intentos no estallaba nada pero a la hora de ver el texto completo inmediatamente saltaba 
                 otra ves el menu y aunque funciona no es comodo tener que volver a subir en la consola porque no lo alcansaste a leer en milesimas de segundo y 
                 para lograr esto sin morir en el intento, hay que encapsular la funcion Thread.sleep dentro de un try- catch para que compile, en caso de que el temporizador 
