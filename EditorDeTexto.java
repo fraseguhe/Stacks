@@ -25,7 +25,7 @@ public class EditorDeTexto {
         int menu;
         /*Nuestro oo mas bien mi programa dentro de un bucle while que 
         solo se acaba cuando mi variable boleana salir es verdadera */
-        while (salir == false) {
+        while (true) {
             /*Las intruciones basicas en muchos comandos print, para usar el programa de la forma mas literal posible para 
             que no haya lugar a interpretaciones y un menu netamente visual que no supe conectar
             realmente con alguna variable, entonces toco por logica 
@@ -36,7 +36,7 @@ public class EditorDeTexto {
             System.out.println("   Menu");
             System.out.println("==========");
             System.out.println("1. Añadir texto");
-            System.out.println("2. Eliminar ultimo texto");
+            System.out.println("2. Eliminar texto");
             System.out.println("3. Deshacer ultima accion");
             System.out.println("4. Ver texto completo");
             System.out.println("5. Salir");
@@ -72,14 +72,21 @@ public class EditorDeTexto {
                 respaldo = new ArrayDeque<>(texto);
                 /*ya luego se añade lo que la variable consola contenga que recordemos que tiene el objeto scanner asignado 
                 y va a recuperar el input ded la consola */
-                texto.add(consola.nextLine());
+                System.out.println("Ingrese el texto a añadir:");
+                texto.push(consola.nextLine());
                 /*Importante el break ya que es como decirle hasta aca, ya puedes salir del switch */
                 break;
                 case 2: 
-                /*misma logica que cuando realizamos el respaldo en case 1 */
-                respaldo = new ArrayDeque<>(texto);
-                /*aca removemos el ultimo elemento añadido */
-                texto.removeLast();
+                 if (texto.isEmpty()) {
+                        System.out.println("No hay texto para eliminar");
+                    } else {
+                        /*misma logica que en caso 1 */
+                        respaldo = new ArrayDeque<>(texto);
+                        System.out.println();
+                        /*aca se imprime que se esta eliminando a la par que se elimina*/
+                        System.out.println("El texto eliminado es:" + texto.pop());
+                        System.out.println(); 
+                    }
                 break;
                 case 3:
                 /*aca asignamos a texto los valores que tenga el respaldo realizado antes de la ultima modificación */ 
@@ -98,12 +105,15 @@ public class EditorDeTexto {
                     System.out.println("  TEXTO");
                     System.out.println("==========");
                     /*aca muy importante yo no queria imprimir el array de texto directamente porque no se veia bien 
-                    lleno de todas esas , y con los [], entonces este ciclo for va a ejecutarse unicamente el numero de elementos 
-                    de texto que haya dentro del arreglo asignado a la variable texto y va a imprimir cada uno de los elementos seguido de un espacio en blanco*/
-                        for (String element:texto) {
-                            System.out.print(element+" ");
+                    lleno de todas esas , y con los [], entonces este ciclo while va a ejecutarse unicamente el numero de elementos 
+                    de texto que haya dentro del arreglo asignado a la variable texto y va a imprimir cada uno de los elementos seguido de 
+                    un espacio en blanco empezando por el ultimo hasta el primero*/
+                    Iterator<String> elemento = texto.descendingIterator();   
+                    while (elemento.hasNext()) {
+                        System.out.print(elemento.next() + " ");
                         }
-                    }/*estos saltos en consola es para que cuando el ciclo for termine y vuelva a ejecutarse el while no sea en la misma linea que nuestro texto
+                    }
+                    /*estos saltos en consola es para que cuando el ciclo for termine y vuelva a ejecutarse el while no sea en la misma linea que nuestro texto
                     y 2 porque me parece que se ve mejor */
                     System.out.println();
                     System.out.println();
@@ -117,13 +127,12 @@ public class EditorDeTexto {
                 break;
                 /*el caso 5 mi favorito es cuando el usuario le da al 5 y aca no hay mucho se establece la variable salir a true y el bucle while finaliza */
                 case 5:
-                salir = true;
-                break;
+                /*la verdad no entiendo proque hay que cerrar la variable asociada a scanner pero el editor dice que es una buena practica y pues ajá */
+                consola.close(); 
+                return;
                 default:
                 System.out.println("Opcion incorrecta vuelva a intentar");
             }
         }
-        /*la verdad no entiendo proque hay que cerrar la variable asociada a scanner pero el editor dice que es una buena practica y pues ajá */
-        consola.close(); 
     }
 }
